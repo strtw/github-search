@@ -27,6 +27,18 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+   {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // This type will contain remote schema Query type
+        typeName: "GITHUB",
+        // This is the field under which it's accessible
+        fieldName: "github",
+        // URL to query from
+        url: "https://api.github.com/graphql",
+      },
+    },
+    
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
