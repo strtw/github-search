@@ -1,37 +1,54 @@
 import React from "react"
-import { Link, useStaticQuery, graphql  } from "gatsby"
+import {  useStaticQuery, graphql  } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import GithubCard from "../components/githubcard"
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {Grid} from '@material-ui/core';
+const theme = createMuiTheme();
 
 const IndexPage = () => {
   const {github} = useStaticQuery(
     graphql`
-        query {
+        query  {
           github {
             organization(login: "debtcollective") {
-              repositories(first: 100) {
+              repositories(first: 50) {
                 nodes {
                   name
                   shortDescriptionHTML
-                   stargazers {
+                  stargazers {
                     totalCount
+                  }
+                  primaryLanguage {
+                    color
+                    name
                   }
                 }
               }
+              id
             }
           }
         }
       `);
   const {nodes : repositories} = github.organization.repositories
   return(
+  <MuiThemeProvider theme={theme}>
+  <React.Fragment>
+    <CssBaseline/>
   <Layout>
     <SEO title="Home" />
-    {repositories.map(({name})=>{
+    <Grid container spacing={2}>
+    {repositories.map(({name,shortDescriptionHTML,stargazers,primaryLanguage},index)=>{
       return(
-        <p>{name}</p>
+        <GithubCard key={index} title={name} description={shortDescriptionHTML} stars={stargazers} language={primaryLanguage}/>
       )
     })}
+    </Grid>
   </Layout>
+  </React.Fragment>
+  </MuiThemeProvider>
 )
 }
 
