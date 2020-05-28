@@ -1,41 +1,39 @@
 import React from "react"
-import { Link, StaticQuery, graphql  } from "gatsby"
+import { Link, useStaticQuery, graphql  } from "gatsby"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
-/*
-function Header() {
-  return (
-    <StaticQuery
-      query={graphql`
-      
-        # Field name parameter defines how you can access a third-party API
-        query{
-          allSpecies {
-            name
+
+const IndexPage = () => {
+  const {github} = useStaticQuery(
+    graphql`
+        query {
+          github {
+            organization(login: "debtcollective") {
+              repositories(first: 100) {
+                nodes {
+                  name
+                  shortDescriptionHTML
+                   stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
           }
         }
-      
-      `}
-      render={data => (
-       
-          <p>{data}</p>
-      )}
-    />
-  )
-}*/
-
-const IndexPage = () => (
+      `);
+  const {nodes : repositories} = github.organization.repositories
+  return(
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    {/*<Header/>*/}
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    {repositories.map(({name})=>{
+      return(
+        <p>{name}</p>
+      )
+    })}
   </Layout>
 )
+}
+
 
 export default IndexPage
