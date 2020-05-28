@@ -1,3 +1,8 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -36,6 +41,10 @@ module.exports = {
         fieldName: "github",
         // URL to query from
         url: "https://api.github.com/graphql",
+        headers: {
+          // Learn about environment variables: https://gatsby.dev/env-vars
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        },
       },
     },
     
