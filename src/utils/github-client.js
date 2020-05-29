@@ -25,6 +25,7 @@ async function authWithGitHub() {
 const GitHubClientContext = React.createContext()
 
 function getClient(token) {
+  console.log(token)
   const headers = {Authorization: `bearer ${token}`}
   return new GraphQLClient('https://api.github.com/graphql', {headers})
 }

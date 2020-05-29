@@ -32,8 +32,7 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    /*
-   {
+  /* {
       resolve: "gatsby-source-graphql",
       options: {
         // This type will contain remote schema Query type
@@ -42,12 +41,12 @@ module.exports = {
         fieldName: "github",
         // URL to query from
         url: "https://api.github.com/graphql",
-        headers: {
+        headers: function(){
           // Learn about environment variables: https://gatsby.dev/env-vars
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+         return {Authorization: `Bearer ${process.env.GITHUB_TOKEN}`}
         },
       },
-    },*/  
+    }, */ 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
