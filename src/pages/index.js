@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useMemo} from "react"
 import {  useStaticQuery, graphql  } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -37,19 +37,40 @@ const APOLLO_QUERY= gql`
       `;
 
 const IndexPage = () => {
-  const { loading, error, data } = useQuery(APOLLO_QUERY, {context: {headers: {'Authorization': 'Bearer ' + localStorage.getItem('github-token')}}});
-    
+  const [githubToken, setgithubToken] = React.useState("");
+  const [queryData, setData] = React.useState("");
+  
+  function handleChange(newValue) {
+    setgithubToken(newValue);
+  }
+
+  function handleLogout(newValue) {
+    setgithubToken(newValue);
+    setData(null)
+  }
+
+  const { loading, error, data, refetch, networkStatus } = useQuery(APOLLO_QUERY, {context: {headers: {'Authorization': 'Bearer ' + localStorage.getItem('github-token')}}});//
+  
+  useMemo(()=>{
+    setData(data); 
+  },[data])
+
+  if(localStorage.getItem("github-token") !== null && !queryData){ //Refetch upon authentication
+    refetch();
+  }
+
+
   return(
   <MuiThemeProvider theme={theme}>
-    <Provider/>
+    <Provider onChange={handleChange} onLogout={handleLogout}/>
   <React.Fragment>
     <CssBaseline/>
   <Layout>
     <SEO title="Home" />
     <Grid container spacing={2}>
-    {loading && <p>Loading...</p>}
+    {loading && networkStatus !== 4 && <p>Loading...</p>}
     {error && <p>Error: ${error.message}</p>}
-    { data ? data.organization.repositories.nodes.map(({name,shortDescriptionHTML,stargazers,primaryLanguage},index)=>{
+    { queryData ? queryData.organization.repositories.nodes.map(({name,shortDescriptionHTML,stargazers,primaryLanguage},index)=>{
       return(
         <GithubCard key={index} title={name} description={shortDescriptionHTML} stars={stargazers} language={primaryLanguage}/>
       )

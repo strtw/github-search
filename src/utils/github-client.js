@@ -24,8 +24,8 @@ async function authWithGitHub() {
 
 const GitHubClientContext = React.createContext()
 
+
 function getClient(token) {
-  console.log(token)
   const headers = {Authorization: `bearer ${token}`}
   return new GraphQLClient('https://api.github.com/graphql', {headers})
 }
@@ -42,7 +42,8 @@ class GitHubClientProvider extends React.Component {
   }
   handleSignoutClick = () => {
     window.localStorage.removeItem('github-token')
-    this.setState({client: null, error: null})
+    this.setState({client: null, error: null}, this.props.onLogout(this.state.client))
+   
   }
   handleLoginClick = async () => {
     const data = await authWithGitHub().catch(error => {
@@ -50,7 +51,7 @@ class GitHubClientProvider extends React.Component {
       this.setState({error})
     })
     window.localStorage.setItem('github-token', data.token)
-    this.setState({client: getClient(data.token)})
+    this.setState({client: getClient(data.token)}, ()=>{this.props.onChange(this.state.client.options.headers.Authorization)})
   }
   render() {
     const {client, error} = this.state
