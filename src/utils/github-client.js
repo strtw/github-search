@@ -42,7 +42,7 @@ class GitHubClientProvider extends React.Component {
   }
   handleSignoutClick = () => {
     window.localStorage.removeItem('github-token')
-    this.setState({client: null, error: null}, this.props.onLogout(this.state.client))
+    this.setState({client: null, error: null}, this.props.onLogout(false))
    
   }
   handleLoginClick = async () => {
@@ -59,7 +59,7 @@ class GitHubClientProvider extends React.Component {
 
     return client ? (
       <GitHubClientContext.Provider value={client}>
-        <button onClick={this.handleSignoutClick}>Sign Out</button>
+        <button className="github-login" onClick={this.handleSignoutClick}>Sign Out</button>
         {children}
       </GitHubClientContext.Provider>
     ) : error ? (
@@ -68,8 +68,7 @@ class GitHubClientProvider extends React.Component {
       </div>
     ) : (
       <div>
-        You have no client!
-        <button onClick={this.handleLoginClick}>Sign In Here!</button>
+        <button className="github-login" onClick={this.handleLoginClick}>Sign In with Github</button>
       </div>
     )
   }
