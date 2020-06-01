@@ -4,12 +4,12 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import GithubCard from './githubcard'
 
-const RenderCards = () => {
+const RenderCards = ({type='user', name='octocat'}) => {
 
     const APOLLO_QUERY= gql`
      
     {
-      organization(login: "debtcollective") {
+      ${type}(login: "${name}") {
         repositories(first: 50) {
           nodes {
             name
@@ -41,7 +41,7 @@ const RenderCards = () => {
     }
 
     if(data && !loading){
-      return data.organization.repositories.nodes.map(({name,shortDescriptionHTML,stargazers,primaryLanguage},index)=>{
+      return data[type].repositories.nodes.map(({name,shortDescriptionHTML,stargazers,primaryLanguage},index)=>{
         return(
           <GithubCard key={index} title={name} description={shortDescriptionHTML} stars={stargazers} language={primaryLanguage}/>
         )
