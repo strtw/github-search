@@ -10,7 +10,7 @@ const RepositorySelector = ({onClick})=>{
                 <option value="organization">organization</option>
             </select>
             <input type='text' placeholder={userType + ' name'} onChange={(e) => setUserName(e.target.value)}></input>
-            <button disabled={!userName} onClick={onClick}>Search</button>
+            <button disabled={!userName} onClick={()=> onClick(userName,userType)}>Search</button>
         </div>
         
     )

@@ -4,8 +4,8 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import GithubCard from './githubcard'
 
-const RenderCards = ({type='user', name='octocat'}) => {
-
+const RenderCards = ({type, name}) => {
+    console.log(type,name)
     const APOLLO_QUERY= gql`
      
     {
