@@ -5,7 +5,7 @@ require("dotenv").config({
  
 module.exports = {
   siteMetadata: {
-    title: `GitHub Repository Searcher`,
+    title: `GitHub Search`,
     description: `Code project`,
     author: `@stuart_wood`,
   },
