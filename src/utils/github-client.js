@@ -69,6 +69,7 @@ class GitHubClientProvider extends React.Component {
     ) : (
       <div>
         <button className="github-login" onClick={this.handleLoginClick}>Sign In with Github</button>
+        {children}
       </div>
     )
   }

@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "gatsby"
-import {Provider} from '../utils/github-client'
 
 export default function NavBar() {
   return (
@@ -20,7 +19,6 @@ export default function NavBar() {
         {` `}
         <Link to="/app/github-jobseekers">Find Jobseekers</Link>
         {` `}
-        <Provider/>
       </nav>
     </div>
   )

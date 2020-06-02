@@ -1,13 +1,26 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-
  
 module.exports = {
   siteMetadata: {
     title: `GitHub Search`,
     description: `Code project`,
     author: `@stuart_wood`,
+    menuLinks:[
+           {
+               name:'home',
+               link:'/'
+            },
+            {
+               name:'user repositories',
+               link:'app/github-repository-search'
+            },
+            {
+              name:'user by location',
+              link:'/app/github-jobseekers'
+           }
+          ]
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

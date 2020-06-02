@@ -10,6 +10,7 @@ import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import fetch from 'isomorphic-fetch';
+import {Provider} from './src/utils/github-client'
 
 const client = new ApolloClient({
     fetch,
@@ -18,8 +19,10 @@ const client = new ApolloClient({
 
 export const wrapRootElement = ({ element }) => {
     return (
+        <Provider>
         <ApolloProvider client={client}>
             {element}
         </ApolloProvider>
+        </Provider>
     )
 }
