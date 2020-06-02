@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import RenderCards from "../components/rendercards"
+import RepositorySelector from '../components/repositoryselector'
 import SEO from "../components/seo"
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -19,14 +20,10 @@ const IndexPage = () => {
   console.log(localStorage.getItem('github-token'))
   const [githubToken, setgithubToken] = React.useState(localStorage.getItem('github-token'));
     
-  function handleChange(newValue) {
+  function handleLogin(newValue) {
     setgithubToken(newValue);  
   }
 
-
-  function handleLogout(newValue) {
-    setgithubToken(newValue);
-  }
 
   function RenderData({isLoggedIn}){
     if(isLoggedIn){
@@ -38,11 +35,12 @@ const IndexPage = () => {
 
   return(
   <MuiThemeProvider theme={theme}>
-    <Provider onChange={handleChange} onLogout={handleLogout}/>
+    <Provider handleLogin={handleLogin}/>
   <React.Fragment>
     <CssBaseline/>
   <Layout>
     <SEO title="Home" />
+    <RepositorySelector/>
     <Grid container spacing={2}>
       <RenderData isLoggedIn={githubToken ? true : false}/>
     </Grid>   

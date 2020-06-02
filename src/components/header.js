@@ -28,7 +28,6 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
-      <RepositorySelector/>
     </div>
   </header>
 )
