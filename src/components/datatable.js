@@ -53,12 +53,19 @@ export default function DataTable(props) {
     });
   };
 
-  return (
-    <table className="data-table">
-      <thead>
-        <tr className="data-table__header-row">{setHeader()}</tr>
-      </thead>
-      <tbody>{RenderRows()}</tbody>
-    </table>
-  );
+  if(props.data){
+    return (
+        <table className="data-table">
+          <thead>
+            <tr className="data-table__header-row">{setHeader()}</tr>
+          </thead>
+          <tbody>{RenderRows()}</tbody>
+        </table>
+      );
+  }else;{
+      return(
+          null
+      )
+  }
+ 
 }

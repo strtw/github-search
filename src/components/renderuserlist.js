@@ -1,17 +1,15 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import DataTable from './datatable'
-import GithubCard from './githubcard'
+import SearchBar from './searchbar'
 
-const RenderUserList = ({location}) => {
+const RenderUserList = ({}) => {
     const gitHubToken = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('github-token') : null
-    const queryList = []
-    const type = ['user']
-    const name = ['strtw']
-    const JOBSEEKER_QUERY= gql `query { 
-        search(query:"location:San Diego", type: USER, first:10){
+    const [location, setLocation] = useState('')
+    const JOBSEEKER_QUERY= gql `query GitHubLocation($location: String!){ 
+        search(query:$location, type: USER, first:10){
          edges{
           node{
             ...on User{
@@ -44,16 +42,15 @@ const RenderUserList = ({location}) => {
       }
     `;
 
-    
-    
+   const { loading, error, data, networkStatus } = useQuery(JOBSEEKER_QUERY, {
+        variables: {location:`location:"${location}"`},
+        context: {headers: {'Authorization': 'Bearer ' + gitHubToken}}},
+        
+   )
 
-   const { loading, error, data, networkStatus } = useQuery(JOBSEEKER_QUERY, 
-      {context: {headers: {'Authorization': 'Bearer ' + gitHubToken}},//TODO move token to prop
-      })
-
-  
-
-   
+   const handleSearch = (value) => {
+         setLocation(value)
+   }
 
 
     if(loading && networkStatus !== 4){
@@ -65,7 +62,9 @@ const RenderUserList = ({location}) => {
 
     if(data && !loading){
         return(
-            <DataTable data={data.search.edges} 
+            <>
+            <SearchBar placeholder={'Enter username'} onClick={handleSearch}/>
+            <DataTable data={data.search.edges}
             columnMap={{
                 "name":"Name",
                 "email":"Email",
@@ -73,6 +72,7 @@ const RenderUserList = ({location}) => {
                 "websiteUrl":"Website",
                 "login":"Github Username"
                 }}/>
+            </>
         )
     } 
 }

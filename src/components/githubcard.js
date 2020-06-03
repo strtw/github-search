@@ -28,10 +28,11 @@ export default function GithubCard({title,description,stars,language}) {
    
       <Card className={classes.root}>
         <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
+          <Typography className={classes.title} color="textPrimary" gutterBottom>
             {title}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+          <Typography className={classes.pos} color="textSecondary" style={{height: '69px',
+    overflowY: 'auto'}}>
             {description}
           </Typography>
           <Typography variant="body2" component="p">
