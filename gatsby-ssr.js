@@ -6,3 +6,6 @@
 
 // You can delete this file if you're not using it
 //export { wrapRootElement } from './src/apollo/wrap-root-element';
+
+import wrapRoot from './root-wrapper'
+export const wrapRootElement = wrapRoot

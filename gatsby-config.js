@@ -14,7 +14,7 @@ module.exports = {
             },
             {
                name:'user repositories',
-               link:'app/github-repository-search'
+               link:'/app/github-repository-search'
             },
             {
               name:'user by location',
@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-material-ui`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

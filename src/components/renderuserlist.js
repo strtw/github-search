@@ -6,6 +6,7 @@ import DataTable from './datatable'
 import GithubCard from './githubcard'
 
 const RenderUserList = ({location}) => {
+    const gitHubToken = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('github-token') : null
     const queryList = []
     const type = ['user']
     const name = ['strtw']
@@ -44,9 +45,10 @@ const RenderUserList = ({location}) => {
     `;
 
     
+    
 
    const { loading, error, data, networkStatus } = useQuery(JOBSEEKER_QUERY, 
-      {context: {headers: {'Authorization': 'Bearer ' + localStorage.getItem('github-token')}},//TODO move token to prop
+      {context: {headers: {'Authorization': 'Bearer ' + gitHubToken}},//TODO move token to prop
       })
 
   

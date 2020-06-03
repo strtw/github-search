@@ -5,8 +5,12 @@ import RepositorySelector from "./repositoryselector"
 import {Provider} from '../utils/github-client'
 
 const Header = ({ siteTitle,menuLinks }) => {
+  let githubToken;
+  if(typeof window !== 'undefined' && window.localStorage){
+     githubToken =   localStorage.getItem('github-token')
+   }
 
-  if(!localStorage.getItem('github-token')){
+  if(!githubToken){
     return(
       <header
       style={{

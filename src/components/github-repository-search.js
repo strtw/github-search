@@ -6,14 +6,15 @@ import {Grid} from '@material-ui/core';
 import '../styles/global.css'
 import { navigate } from "gatsby"
 
-const GithubRepoSearch = () => {
- 
-  
+const GithubRepoSearch = () => {  
   const [userName,setUserName] = useState('')
   const [userType,setUserType] = useState('')
+  let githubToken;
+  if(typeof window !== 'undefined' && window.localStorage){
+    githubToken = localStorage.getItem('github-token')
+  }
   
-  
-  if (!localStorage.getItem('github-token')) {
+  if (!githubToken) {
     navigate("/")
     return null
   }
@@ -36,7 +37,7 @@ const GithubRepoSearch = () => {
     <SEO title="Github Search"/>
     <RepositorySelector onClick={updateQuery}/>
     <Grid container spacing={2}>
-      <RenderData isLoggedIn={localStorage.getItem('github-token') ? true : false} />
+      <RenderData isLoggedIn={githubToken ? true : false} />
     </Grid>   
   </React.Fragment>
 )

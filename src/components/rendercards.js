@@ -5,6 +5,10 @@ import gql from 'graphql-tag';
 import GithubCard from './githubcard'
 
 const RenderCards = ({type, name}) => {
+  let githubToken;
+  if(typeof window !== 'undefined' && window.localStorage){
+     githubToken =   localStorage.getItem('github-token')
+   }
     console.log(type,name)
     const APOLLO_QUERY= gql`
      
@@ -30,7 +34,7 @@ const RenderCards = ({type, name}) => {
 `;
 
     const { loading, error, data, networkStatus } = useQuery(APOLLO_QUERY, 
-      {context: {headers: {'Authorization': 'Bearer ' + localStorage.getItem('github-token')}},
+      {context: {headers: {'Authorization': 'Bearer ' + githubToken}},
       })
 
     if(loading && networkStatus !== 4){

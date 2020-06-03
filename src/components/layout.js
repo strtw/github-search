@@ -16,7 +16,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 //import "./layout.css"
 
 
-const theme = createMuiTheme();
+//const theme = createMuiTheme();
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -34,8 +34,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-     <MuiThemeProvider theme={theme}>
-      <CssBaseline/>
+    <>
       <Header menuLinks={data.site.siteMetadata.menuLinks} siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
@@ -48,7 +47,7 @@ const Layout = ({ children }) => {
         <footer>
         </footer>
       </div>
-    </MuiThemeProvider>
+    </>
   )
 }
 
