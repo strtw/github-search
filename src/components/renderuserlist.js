@@ -65,7 +65,14 @@ const RenderUserList = ({location}) => {
 
     if(data && !loading){
         return(
-            <DataTable data={data.search.edges}/>
+            <DataTable data={data.search.edges} 
+            columnMap={{
+                "name":"Name",
+                "email":"Email",
+                "location":"Location",
+                "websiteUrl":"Website",
+                "login":"Github Username"
+                }}/>
         )
     } 
 }

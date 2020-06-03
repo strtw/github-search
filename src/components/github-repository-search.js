@@ -13,11 +13,6 @@ const GithubRepoSearch = () => {
   if(typeof window !== 'undefined' && window.localStorage){
     githubToken = localStorage.getItem('github-token')
   }
-  
-  if (!githubToken) {
-    navigate("/")
-    return null
-  }
 
   function RenderData(){
     if(userName && userType){

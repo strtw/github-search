@@ -7,7 +7,7 @@ import {Provider} from '../utils/github-client'
 const Header = ({ siteTitle,menuLinks }) => {
   let githubToken;
   if(typeof window !== 'undefined' && window.localStorage){
-     githubToken =   localStorage.getItem('github-token')
+     githubToken = localStorage.getItem('github-token')
    }
 
   if(!githubToken){
