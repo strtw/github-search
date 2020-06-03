@@ -10,7 +10,7 @@ const App = () => (
   <Layout>
     <Router>
       <PrivateRoute path="/app/github-repository-search" component={GithubRepoSearch}/>
-      <PrivateRoute  path="/app/github-jobseekers" component={RenderUserList}/>
+      <PrivateRoute  path="/app/github-location-search" component={RenderUserList}/>
       <IndexPage path="/"/>
     </Router>
   </Layout>

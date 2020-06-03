@@ -18,7 +18,7 @@ module.exports = {
             },
             {
               name:'user by location',
-              link:'/app/github-jobseekers'
+              link:'/app/github-location-search'
            }
           ]
   },

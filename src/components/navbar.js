@@ -17,7 +17,7 @@ export default function NavBar() {
         {` `}
         <Link to="/app/github-repository-search">User Repositories</Link>
         {` `}
-        <Link to="/app/github-jobseekers">Find Jobseekers</Link>
+        <Link to="/app/github-location-search">Find Jobseekers</Link>
         {` `}
       </nav>
     </div>
