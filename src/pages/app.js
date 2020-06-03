@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import GithubRepoSearch from "../components/github-repository-search"
 import IndexPage from "./index"
 import RenderUserList from '../components/renderuserlist'
-import PrivateRoute from "../components/privateRoute"
+import PrivateRoute from "../components/privateroute"
 
 const App = () => (
   <Layout>
